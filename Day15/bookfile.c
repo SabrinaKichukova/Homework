@@ -66,7 +66,7 @@ for (int i = 0; i < COUNT; i++){
         perror("Error: \n");
         return EXIT_FAILURE;
     }
-    fwrite(books,sizeof(book),COUNT,fp);
+    fwrite(&books,sizeof(book),COUNT,fp);
     fclose(fp);
 
          
