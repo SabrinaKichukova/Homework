@@ -1,0 +1,43 @@
+src = $(wildcard *.c)           	Събира всички .с файлове в src
+obj = $(src:.c=.o)			прави всички файлове .ц файлове в .о
+LDFLAGS = -lGL -lglut -lpng -lz -lm	събира флаговете необходими за библиотеки в LDFLAGS
+myprog: $(obj)				
+$(CC) -o $@ $^ $(LDFLAGS)		компилира програмата
+.PHONY: clean				таргет: изчистване
+clean:
+rm -f $(obj) myprog
+
+
+
+CFLAGS=-I$(IDIR)				CFLAGS = всички инклуд директории	
+
+ODIR=obj					директорията obj се записва в ODIR
+LDIR =../lib					директорията lib се записва LDIR
+LIBS=-lm					флагът lm се записва в LDIR
+_DEPS = hellomake.h				hellomake.h се записва в _DEPS
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))	в DEPS се записва пътя към IDIR _DEPS
+_OBJ = hellomake.o hellofunc.o		в _OBJ се записват двата файла
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))		в OBJ се записва пътя към ODIR _OBJ
+$(ODIR)/%.o: %.c $(DEPS)			за съзадаванете на .о файл трябва .с
+$(CC) -c -o $@ $< $(CFLAGS)			създава се .о файл
+hellomake: $(OBJ)
+$(CC) -o $@ $^ $(CFLAGS) $(LIBS)		
+.PHONY: clean					изчистване
+clean:
+rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
+
+
+
+# my makefile
+CC=clang
+CFLAGS=-lm -pthread			флаговете за библиотеки се записват в променливата CFLAGS
+OBJS = main.o sum.o mult.o div.o sub.o	OBJS - присвоява избровните файлове
+.PHONY: all				таргет :  all
+all: program				необходима е програма
+program: $(OBJS)			за програмата:  OBJ обджект файловете
+$(CC) $^ -o $@ $(CFLAGS)		компилиране
+%.o: %.c				файлове .с и .о 
+$(CC) -c $< -o $@
+.PHONY: clean				изчистване
+clean:
+rm -rf *.o program
