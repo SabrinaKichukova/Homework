@@ -11,17 +11,17 @@ int main()
 {
     double volume = 0.0;
     double const pi = 3.14;
-    double r,h;
+    double r, h;
 
     printf("Please, enter r:\n");
-    scanf("%lf",&r);
+    scanf("%lf", &r);
 
     printf("Please, enter h:\n");
-    scanf("%lf",&h);
+    scanf("%lf", &h);
 
-    volume = pi*r*r*h;
+    volume = pi * r * r * h;
 
-    printf("The volume is: %.2lf\n",volume);
+    printf("The volume is: %.2lf\n", volume);
 
     return EXIT_SUCCESS;
 }
