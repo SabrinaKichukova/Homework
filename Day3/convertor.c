@@ -16,169 +16,156 @@ int main()
   int number;
   int inputbase;
   int outputbase;
-  int a,b,c;
+  int a, b, c;
  
-
   printf("Please, enter number:");
-  scanf("%d",&number);
+  scanf("%d", &number);
   
   printf("Please, enter current base of the number:");
-  scanf("%d",&inputbase);
+  scanf("%d", &inputbase);
 
   printf("Please, enter desired base of the number:");
-  scanf("%d",&outputbase);
+  scanf("%d", &outputbase);
 
   isalnum(a);
   isalnum(b);
   isalnum(c);
 
-  checkForErr(number,inputbase,outputbase);
+  checkForErr(number, inputbase, outputbase);
 
-  if((inputbase ==2)&&(outputbase==8)){
-
+  if ((inputbase == 2) && (outputbase == 8))
+  {
     printf("OCT: %o\n", number);
-  
-  } else if((inputbase ==2)&&(outputbase==10)){
-
+  }
+  else if ((inputbase == 2) && (outputbase == 10))
+  {
     int dec = 0, i = 0, rem;
 
-  while (number!=0) {
-    rem = number % 10;
-    number /= 10;
-    dec += rem * pow(2, i);
-    ++i;
-  }
+    while (number!=0) 
+    {
+      rem = number % 10;
+      number /= 10;
+      dec += rem * pow(2, i);
+      ++i;
+    }
     printf("DEC: %d\n", dec);
 
-  } else if((inputbase ==2)&&(outputbase==16)){
-
+  } 
+  else if ((inputbase == 2) && (outputbase == 16))
+  {
     int rem;
     int hex = 0;
     int i = 1;
 
-    while (number != 0){
+    while (number != 0)
+    {
       rem = number % 10;
       hex = hex + rem * i;
       i = i * 2;
       number = number / 10;
-   }
-
+    }
     printf("HEX: %x\n", hex);
-  
-
-  } else if((inputbase == 10)&&(outputbase==2)){
-
+  }
+  else if ((inputbase == 10) && (outputbase == 2))
+  {
     int bin = 0;
     int rem;
     int i = 1;
 
-  while (number!=0) {
-    rem = number % 2;
-    number /= 2;
-    bin += rem * i;
-    i *= 10;
+    while (number != 0) 
+    {
+      rem = number % 2;
+      number /= 2;
+      bin += rem * i;
+      i *= 10;
+    }
+    printf("DEC: %d\n", bin);
   }
-  printf("DEC: %d\n", bin);
-  
-  } else if((inputbase == 8)&&(outputbase==10)){
-
+  else if((inputbase == 8) && (outputbase==10))
+  {
     int dec = 0;
     int i = 0;
  
-  while (number != 0) {
-    
-    dec += (number%10) * (pow(8,i));
-    ++i;
-    number/=10;
-
+    while (number != 0) 
+    {
+      dec += (number % 10) * pow(8, i);
+      ++i;
+      number /= 10;
     }
-
-  printf("DEC: %d\n", dec); 
-
-  } else if((inputbase == 8)&&(outputbase==2)){
-
+    printf("DEC: %d\n", dec); 
+  }
+  else if ((inputbase == 8) && (outputbase == 2))
+  {
     //First we converting octal to decimal
     int dec = 0;
     int i=0;
 
-  while (number != 0) {
-    
-
-    dec += (number % 10) * (pow(8, i));
-    ++i;
-    number /= 10;
-    
+    while (number != 0) 
+    {
+      dec += (number % 10) * pow(8, i);
+      ++i;
+      number /= 10;
     }
-    printf("BIN: %d\n", dec );
+    printf("BIN: %d\n", dec);
     //Next converting decimal to binary
     i = 1;
     int bin;
 
-    while (dec != 0) {
-
-    bin += (dec % 2) * i;
-    dec /= 2;
-    i *= 10;
-    
+    while (dec != 0)
+    {
+      bin += (dec % 2) * i;
+      dec /= 2;
+      i *= 10;
     }
-    printf("BIN: %d\n", bin );
-  
-    } else if((inputbase == 8)&&(outputbase==16)){
-
+    printf("BIN: %d\n", bin);
+  } 
+  else if ((inputbase == 8) && (outputbase == 16))
+  {
     printf("HEX: %x\n", number);
-
-
-   } else if((inputbase == 16)&&(outputbase==10)){
-
-    printf("DEC: %d\n", number );
-    
-    } else if((inputbase == 16)&&(outputbase==8)){
-
+  } 
+  else if ((inputbase == 16) && (outputbase == 10))
+  {
+    printf("DEC: %d\n", number ); 
+  } 
+  else if ((inputbase == 16) && (outputbase == 8))
+  {
     printf("OCT: %o\n", number );
-  
-  } else {
-
-    fprintf(stderr,"Not correct input data!");
-
+  } 
+  else 
+  {
+    fprintf(stderr, "Not correct input data!");
   }
-
     return 0;
 }
 
 
-int checkForErr(int number, int inputbase, int outputbase){
+int checkForErr(int number, int inputbase, int outputbase)
+{
+  if ((isalnum(number) && isalnum(inputbase) && isalnum(outputbase)) != 0 )
+    {
+      fprintf(stderr,"Not correct input data!");
+      return -1;
+    }
 
-if ((isalnum(number) && isalnum(inputbase) && isalnum(outputbase)) != 0 ){
-
-  fprintf(stderr,"Not correct input data!");
-
-  return -1;
-
+  if (((inputbase || outputbase) <= 2) || ((inputbase || outputbase) > 32))
+  {
+    fprintf(stderr, "Error! Not correct base!");
+    return -1;
+  }
 }
-if(((inputbase || outputbase)<=2) || ((inputbase || outputbase)>32)){
-
-  fprintf(stderr,"Error! Not correct base!");
-
-  return -1;
-
-}
-
-}
-
-
 /*
   
   Bin to hex and hex to bin are not done yet. 
 
- if((inputbase == 8)&&(outputbase==16)){
-
-   int i=0;
+ if((inputbase == 8)&&(outputbase == 16))
+ {
+   int i = 0;
    
-   char hex[]=&number;
+   char hex[] = &number;
 
-   while(hex[i])  
+   while (hex[i])  
    {  
-       switch(hex[i])  
+       switch (hex[i])  
        {  
            case '0':  
            printf("0000");  
@@ -248,6 +235,7 @@ if(((inputbase || outputbase)<=2) || ((inputbase || outputbase)>32)){
            break;  
        }  
        i++;  
-   }}  
+    }
+  }  
     printf("HEX: %x\n", number );
     */
