@@ -33,7 +33,7 @@ int main()
         }
         else
         {
-            result = ((a & ~b) || (~a & b));
+            result = ((a & ~b) | (~a & b));
             printf ("%d\n", result);
         }
     }
@@ -55,5 +55,5 @@ int main()
         }
     }
 
-    return EXIT_SUCCESS;
+    return 0;
 }
