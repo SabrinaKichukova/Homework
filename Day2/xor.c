@@ -8,16 +8,16 @@ Purpose: This program calculate XOR in 2 modes for 2 and 3 digit.
 
 int main()
 {
-    int a,b,c;
+    int a, b, c;
     int mode;
     int result;
 
     printf("\nFor 2 digits XOR mode enter 2, for 3 XOR mode enter 3.\n");
-    scanf("%d",&mode);
+    scanf("%d", &mode);
 
     if ((mode != 2) & (mode != 3))
     {
-        fprintf(stderr,"Invalid mode!");
+        fprintf(stderr, "Invalid mode!");
         return EXIT_FAILURE;
     }
 
@@ -38,7 +38,7 @@ int main()
         }
     }
 
-    if (mode ==3)
+    if (mode == 3)
     {
         printf("Enter three numbers: 0 or 1\n");
         scanf("%d %d %d", &a, &b, &c);
