@@ -13,10 +13,10 @@ int main()
 
     scanf("%d %d %d", &a, &b, &c);
 
-    if((a > b) && (a > c))
+    if ((a > b) && (a > c))
     {
         max = a;
-        if(b > c)
+        if (b > c)
         {
             printf("%d %d %d\n", max, b, c);
         }
@@ -25,7 +25,7 @@ int main()
             printf("%d %d %d\n", max, c, b);
         }
     }
-    else if((b > a) && (b > c))
+    else if ((b > a) && (b > c))
     {
         max = b;
         if (a > c)
@@ -36,9 +36,8 @@ int main()
         {
             printf("%d %d %d\n", max, c, a);  
         }
-
     }
-    else if((c > a) && (c > b))
+    else if ((c > a) && (c > b))
     {
         max = c;
         if (a > b)
