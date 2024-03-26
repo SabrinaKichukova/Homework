@@ -22,7 +22,6 @@ unsigned sumArrayDigits(const int* arr, size_t n)
 
         while (num)
         {
-
             rem = num % 10;
             sum += rem;
             num = num / 10;
