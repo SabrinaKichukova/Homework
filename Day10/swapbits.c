@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
-#include<inttypes.h>
+#include <inttypes.h>
 
 void swapBytes(uint16_t*);
 
@@ -25,32 +25,30 @@ typedef union{
        uint16_t bit14:1;
        uint16_t bit15:1;
     };
-}swap;
+} swap;
     
-
-int main(){
-uint16_t word;
-
-printf("Please enter word:");
-scanf("%hx",&word);
-
-swapBytes(&word);
+int main()
+{
+    uint16_t word;
+    
+    printf("Please enter word:");
+    scanf("%hx", &word);
+    
+    swapBytes(&word);
 
     return 0;
 }
 
-void swapBytes(uint16_t* word){
+void swapBytes(uint16_t* word)
+{
+    int temp;
+    swap swap1;
+    swap1.word = *word;
+    printf("Bit1:%d Bit15: %d\n",swap1.bit0, swap1.bit15);
 
-int temp;
+    temp = swap1.bit0;
+    swap1.bit0 = swap1.bit15;
+    swap1.bit15 = temp;
 
-swap swap1;
-swap1.word = *word;
-printf("Bit1:%d Bit15: %d\n",swap1.bit0,swap1.bit15);
-
-temp = swap1.bit0;
-swap1.bit0 = swap1.bit15;
-swap1.bit15 = temp;
-
-printf("Bit1:%d Bit15: %d\n",swap1.bit0,swap1.bit15);
-
+    printf("Bit1:%d Bit15: %d\n", swap1.bit0, swap1.bit15);
 }
