@@ -11,7 +11,8 @@ int main()
     double c;
     char operation;
                      
-    while(scanf("%lf %c %lf",&a, &operation, &b)!= EOF){
+    while (scanf("%lf %c %lf",&a, &operation, &b)!= EOF)
+    {
     
         switch (operation)
         {
