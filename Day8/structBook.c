@@ -130,95 +130,134 @@ int main()
     return 0;
 }
 
-double randDouble(double min, double max){
+double randDouble(double min, double max)
+{
     return min + ((double)rand() / RAND_MAX) * (max - min);
 }
-int randInt(int min, int max){
+int randInt(int min, int max)
+{
     return min + rand() % (max -min + 1); // [min; max]
 }
-void printInfo(book books){
+void printInfo(book books)
+{
    
     printf("Name:   %s,     ", books.name);
     printf("Author: %s,     ", books.author);
     printf("Pages:  %d,     ", books.pages);
     printf("Price:  %.2lf\n", books.price);
 }
-void bubbleSort(void* arr, size_t n, size_t size, int (*comp)(const void*,const void*)){
-   for (int i = 0; i < n; i++){
-       for (int j = 0; j < (n-i-1) * size; j += size){
-           if (comp(arr + j, arr + j + size) > 0){
-              swapg(arr + j, arr + j + size, size);
-             
+void bubbleSort(void* arr, size_t n, size_t size, int (*comp)(const void*,const void*))
+{
+   for (int i = 0; i < n; i++)
+   {
+       for (int j = 0; j < (n - i - 1) * size; j += size)
+       {
+           if (comp(arr + j, arr + j + size) > 0)
+           {
+                swapg(arr + j, arr + j + size, size);      
            }
        }
    }
 }
-int strCompName(const void* book1, const void* book2){
+
+int strCompName(const void* book1, const void* book2)
+{
     book* bookn = (book*)book1;
     book* bookm = (book*)book2;
     char name1 = *bookn->name;
     char name2 = *bookm->name;
 
-    if (name1 == name2) {
+    if (name1 == name2) 
+    {
         return 0;
-    } else if (name1 < name2){
+    }
+    else if (name1 < name2)
+    {
         return 1;
-    } else {
+    }
+    else
+    {
         return -1;
     }
-
 }
-int strCompAuthor(const void* book1, const void* book2){
+
+int strCompAuthor(const void* book1, const void* book2)
+{
     book* bookn = (book*)book1;
     book* bookm = (book*)book2;
     char author1 = *bookn->author;
     char author2 = *bookm->author;
 
-    if (author1 == author2) {
+    if (author1 == author2)
+    {
         return 0;
-    } else if (author1 > author2){
+    } 
+    else if (author1 > author2)
+    {
         return 1;
-    } else {
+    }
+    else 
+    {
         return -1;
     }
 }
-int compareInt(const void* book1, const void* book2){
+
+int compareInt(const void* book1, const void* book2)
+{
     book* bookn = (book*)book1;
     book* bookm = (book*)book2;
     int  pages1 = bookn->pages;
     int  pages2 = bookm->pages;
 
-    if (pages1 == pages2) {
+    if (pages1 == pages2) 
+    {
         return 0;
-    } else if (pages1 > pages2){
+    }
+    else if (pages1 > pages2)
+    {
         return 1;
-    } else {
+    }
+    else 
+    {
         return -1;
     }
 }
-int compareDouble(const void* book1, const void* book2){
+
+int compareDouble(const void* book1, const void* book2)
+{
     book* bookn = (book*)book1;
     book* bookm = (book*)book2;
     double price1 = bookn->price;
     double price2 = bookm->price;
 
-    if ((fabs(price1-price2)) < 0.001) {
+    if ((fabs(price1-price2)) < 0.001) 
+    {
         return 0;
-    } else if (price1 > price2){
+    }
+    else if (price1 > price2)
+    {
         return 1;
-    } else {
+    }
+    else
+    {
         return -1;
     }
 }
-void swapg (void *book1, void *book2, size_t size){
+
+void swapg (void *book1, void *book2, size_t size)
+{
     u_int8_t arr[size];
     memmove(arr, book1, size);
     memmove(book1, book2, size);
     memmove(book2, arr, size);
 }
-void *lsearch(void *key, size_t count, void* arr, size_t size, int (*comp)(const void* a, const void* b)){
-    for (int i = 0; i < (size*count); i+=size){
-        if (comp(arr+i,key) == 0){
+
+void *lsearch(void *key, size_t count, void* arr, size_t size, int (*comp)(const void* a, const void* b))
+{
+    for (int i = 0; i < (size * count); i += size)
+    {
+        if (comp(arr + i, key) == 0)
+        {
             return arr + i;
         }
     }
