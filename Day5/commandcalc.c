@@ -13,7 +13,6 @@ int main()
                      
     while (scanf("%lf %c %lf",&a, &operation, &b)!= EOF)
     {
-    
         switch (operation)
         {
             case '+':
