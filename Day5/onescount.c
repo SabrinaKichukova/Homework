@@ -21,7 +21,7 @@ unsigned onesCount(size_t size,unsigned count, ...)
    va_start(args, count);
       for (int i = 0; i < count; i++)
       {
-         if((size < 1) || (size > sizeof(int)))
+         if ((size < 1) || (size > sizeof(int)))
          {
             fprintf(stderr, "Incorrect size of mask!");
             return EXIT_FAILURE;
@@ -33,7 +33,7 @@ unsigned onesCount(size_t size,unsigned count, ...)
             int lastbit = 0;
             int args1 = va_arg(args, int);
 
-             while(args1 != 0)
+             while (args1 != 0)
              {
                lastbit = args1 & bit;
                  if (lastbit == 1)
