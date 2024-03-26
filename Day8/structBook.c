@@ -14,31 +14,30 @@ typedef struct {
 } book;
 
 void printInfo(book);
-void bubbleSort(void* , size_t, size_t, int (*comp)(const void*,const void*));
+void bubbleSort(void* , size_t, size_t, int (*comp)(const void*, const void*));
 double randDouble(double, double);
 int randInt(int, int);
-int strCompName(const void* , const void*);
+int strCompName(const void*, const void*);
 void swapg (void *, void *, size_t);
 int strCompAuthor(const void* , const void*);
 int compareInt(const void*, const void*);
-int compareDouble(const void* , const void*);
-void *lsearch(void* , size_t, void*, size_t, int (*comp)(const void*, const void*));
-int binarySearch(int* , size_t, int);
+int compareDouble(const void*, const void*);
+void *lsearch(void*, size_t, void*, size_t, int (*comp)(const void*, const void*));
+int binarySearch(int*, size_t, int);
 
-
-int main(){
-    
+int main()
+{    
     srand(time(NULL)); 
-    const char names[][10] = {"HarryP","Inferno","Origin","TheHobbit","Thesecret"};
-    const char authors[][10] = { "Tolkien","Alex","DanBrown","Rowling","Vazov"};
+    const char names[][10] = {"HarryP", "Inferno", "Origin", "TheHobbit", "Thesecret"};
+    const char authors[][10] = { "Tolkien", "Alex", "DanBrown", "Rowling", "Vazov"};
     book books[COUNT]; 
-    for (int i = 0; i < COUNT; i++){    
+    for (int i = 0; i < COUNT; i++)
+    {    
         strcpy(books[i].name, names[i]);  
         strcpy(books[i].author, authors[i]);  
-        books[i].pages = randInt(5,2000);   
-        books[i].price = randDouble(2,1000);    
+        books[i].pages = randInt(5, 2000);   
+        books[i].price = randDouble(2, 1000);    
     }
-   //int (*comp[4])(const void*,const void*) = {strCompName, strCompAuthor,compareInt,compareDouble};
         int option;
         printf("Enter option:\n");
         printf("\n1.Sort by title:\n");
@@ -50,76 +49,83 @@ int main(){
         printf("\n7.Search by number of pages:\n");
         scanf("%d",&option);
 
-
-            if(option == 1){
-               
-                bubbleSort( books, COUNT, sizeof(book), strCompName);
-                for (int j = 0; j < COUNT; j++){
+        if (option == 1)
+        {       
+            bubbleSort( books, COUNT, sizeof(book), strCompName);
+            for (int j = 0; j < COUNT; j++)
+            {
                 printInfo(books[j]);
-                }
-            }    
-            if(option == 2){
-                
-                bubbleSort( books, COUNT, sizeof(book), strCompAuthor);
-                for (int j = 0; j < COUNT; j++){
-                printInfo(books[j]);
-
-                }
             }
-            if(option == 3){
-                
-                bubbleSort( books, COUNT, sizeof(book), compareInt);
-                for (int j = 0; j < COUNT; j++){
+        }    
+        if (option == 2)
+        {        
+            bubbleSort( books, COUNT, sizeof(book), strCompAuthor);
+            for (int j = 0; j < COUNT; j++)
+            {
                 printInfo(books[j]);
-
-                }
             }
-            if(option == 4){
-
-                bubbleSort( books, COUNT, sizeof(book), compareDouble);
-                for (int j = 0; j < COUNT; j++){
+        }
+        if (option == 3)
+        {        
+            bubbleSort( books, COUNT, sizeof(book), compareInt);
+            for (int j = 0; j < COUNT; j++)
+            {
                 printInfo(books[j]);
-
-                }
             }
-            if(option == 5){
-
-                for (int i = 0; i < COUNT; i++){
+        }
+        if (option == 4)
+        {
+            bubbleSort( books, COUNT, sizeof(book), compareDouble);
+            for (int j = 0; j < COUNT; j++)
+            {
+                printInfo(books[j]);
+            }
+        }
+        if (option == 5)
+        {
+            for (int i = 0; i < COUNT; i++)
+            {
                 printInfo(books[i]);
             }
+        }
+        if (option == 6)
+        {
+            book forSearch1;
+            forSearch1.price = 22.5;
+            book *booksl = (book*)lsearch(&forSearch1, COUNT, books, sizeof(book),compareDouble);
+            if (booksl == NULL)
+            {
+                printf("Not found!\n");
             }
-            if(option == 6){
-
-                book forSearch1;
-                forSearch1.price = 22.5;
-
-                book *booksl = (book*)lsearch(&forSearch1, COUNT, books, sizeof(book),compareDouble);
-                 if (booksl == NULL){
-                printf("Not found!\n");
-                } else {
-                 printf("\n\nFound:\n");
+            else
+            {
+                printf("\n\nFound:\n");
                 printInfo(*booksl);
-                }
-            }   
-            if(option == 7){
-                book forSearch;
-                forSearch.pages = 350;
+            }
+        }   
+        if (option == 7)
+        {
+            book forSearch;
+            forSearch.pages = 350;
+            bubbleSort( books, COUNT, sizeof(book), compareInt);
 
-                bubbleSort( books, COUNT, sizeof(book), compareInt);
-
-                for (int j = 0; j < COUNT; j++){
+            for (int j = 0; j < COUNT; j++)
+            {
                 printInfo(books[j]);
-                } 
+            } 
 
-                book *books1 = bsearch(&forSearch, books, COUNT, sizeof(book), compareInt);
+            book *books1 = bsearch(&forSearch, books, COUNT, sizeof(book), compareInt);
 
-                if (books1 == NULL){
+            if (books1 == NULL)
+            {
                 printf("Not found!\n");
-                } else {
-                 printf("\n\nFound:\n");
+            }
+            else 
+            {
+                printf("\n\nFound:\n");
                 printInfo(*books1);
-                }   
-            }    
+            }   
+        }    
 
     return 0;
 }
