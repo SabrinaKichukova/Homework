@@ -19,7 +19,7 @@ unsigned sumArrayDigits(const int* arr, size_t n)
     for(int i = 0; i < n; i++)
     {
         int num = *(arr + i);
-        while(num)
+        while (num)
         {
             rem = num % 10;
             sum += rem;
