@@ -4,7 +4,8 @@
 #include <time.h>
 #define COUNT 5
 
-typedef struct book{
+typedef struct book
+{
     char name[150];
     char author[100];
     int  pages;
@@ -21,11 +22,13 @@ struct book* SortedMerge(struct book* a, struct book* b);
 void FrontBackSplit(struct book*, struct book**, struct book**);
 void MergeSort(struct book**);
 
-int main(void){
+int main(void)
+{
     book* head = NULL;
     srand(time(NULL)); 
     
-    for (int i = 0; i < COUNT; i++){
+    for (int i = 0; i < COUNT; i++)
+    {
         push(&head);
     }   
     
@@ -33,39 +36,45 @@ int main(void){
     printBook(head);
     freeList(&head);
          
-return 0;
+    return 0;
 }
 
-double randDouble(double min, double max){
+double randDouble(double min, double max)
+{
     return min + ((double)rand() / RAND_MAX) * (max - min);
 }
-int randInt(int min, int max){
-    return min + rand() % (max -min + 1); // [min; max]
+
+int randInt(int min, int max)
+{
+    return min + rand() % (max -min + 1);
 }
 
-void printBook(book* head){
+void printBook(book* head)
+{
 
-     while (head != NULL) {
-    printf("Title: %s\n",head->name);
-    printf("Author: %s\n",head->author);
-    printf("Pages: %d\n",head->pages);
-    printf("Price: %.2f\n",head->price);
-    printf("\n");
-    head = head->next;
+    while (head != NULL) 
+    {
+        printf("Title: %s\n", head->name);
+        printf("Author: %s\n", head->author);
+        printf("Pages: %d\n", head->pages);
+        printf("Price: %.2f\n", head->price);
+        printf("\n");
+        head = head->next;
     }    
 }
 
-
-void push(book** head){
-book* books = malloc(sizeof(book));
-if(!books){
+void push(book** head)
+{
+    book* books = malloc(sizeof(book));
+    if (!books)
+    {
      fprintf(stderr,"Error! Problem with memory allocation!");
      exit(-1);
-}
-books->next = (*head);
+    }
+    books->next = (*head);
 
-int name_length = 4 + rand() % 7;
-for (int j = 0; j < name_length; j++)
+    int name_length = 4 + rand() % 7;
+    for (int j = 0; j < name_length; j++)
     {
         char rand_lowercase = 'a' + rand() % ('z' - 'a' + 1);
         char rand_uppercase = 'A' + rand() % ('Z' - 'A' + 1);
@@ -80,10 +89,11 @@ for (int j = 0; j < name_length; j++)
             books->name[j] = rand_uppercase;
         }    
     }
-        books->name[name_length] = '\0';
-
-int author_length = 4 + rand() % 7;
-for (int j = 0; j < author_length; j++)
+    
+    books->name[name_length] = '\0';
+    int author_length = 4 + rand() % 7;
+    
+    for (int j = 0; j < author_length; j++)
     {
         char rand_lowercase = 'a' + rand() % ('z' - 'a' + 1);
         char rand_uppercase = 'A' + rand() % ('Z' - 'A' + 1);
@@ -98,16 +108,18 @@ for (int j = 0; j < author_length; j++)
             books->author[j] = rand_uppercase;
         }    
     }
+    
     books->author[author_length] = '\0';
-    books->pages = randInt(5,2000);   
-    books->price = randDouble(1.0,1000);
+    books->pages = randInt(5, 2000);   
+    books->price = randDouble(1.0, 1000);
     (*head) = books;   
-
 }
 
-void freeList(book** head){
+void freeList(book** head)
+{
     book* current = (*head);
-    while (current != NULL){
+    while (current != NULL)
+    {
         book* temp = current;
         current = current->next;
         free(temp);
@@ -121,17 +133,14 @@ void MergeSort(struct book** head)
     struct book* a;
     struct book* b;
  
-    if ((head1 == NULL) || (head1->next == NULL)) {
+    if ((head1 == NULL) || (head1->next == NULL)) 
+    {
         return;
     }
- 
-    FrontBackSplit(head1, &a, &b);
- 
     
+    FrontBackSplit(head1, &a, &b);
     MergeSort(&a);
     MergeSort(&b);
- 
-   
     *head = SortedMerge(a, b);
 }
 
@@ -139,34 +148,40 @@ struct book* SortedMerge(struct book* a, struct book* b)
 {
     struct book* result = NULL;
  
-    
     if (a == NULL)
+    {
         return (b);
+    }
     else if (b == NULL)
+    {
         return (a);
- 
+    }
     
-    if (strcmp(a->name,b->name) <=0 ) {
+    if (strcmp(a->name,b->name) <=0 )
+    {
         result = a;
         result->next = SortedMerge(a->next, b);
     }
-    else {
+    else 
+    {
         result = b;
         result->next = SortedMerge(a, b->next);
     }
     return (result);
 }
 
-void FrontBackSplit(struct book* head,struct book** frontRef, struct book** backRef)
+void FrontBackSplit(struct book* head, struct book** frontRef, struct book** backRef)
 {
     struct book* fast;
     struct book* slow;
     slow = head;
     fast = head->next;
  
-    while (fast != NULL) {
+    while (fast != NULL) 
+    {
         fast = fast->next;
-        if (fast != NULL) {
+        if (fast != NULL) 
+        {
             slow = slow->next;
             fast = fast->next;
         }
