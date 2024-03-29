@@ -1,3 +1,5 @@
+// Not finished!
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -19,8 +21,6 @@ void printBook(book*);
 void push(book**);
 void freeList(book**);
 struct book* SortedMerge(struct book* a, struct book* b);
-void FrontBackSplit(struct book*, struct book**, struct book**);
-void MergeSort(struct book**);
 
 int main(int argc, char** argv)
 {    
